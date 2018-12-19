@@ -1031,22 +1031,19 @@ public class PlayerView extends FrameLayout {
 
   @Override
   public boolean onTouchEvent(MotionEvent ev) {
+    if (!useController || player == null) {
+      return super.onTouchEvent(ev);
+    }
     if (ev.getActionMasked() != MotionEvent.ACTION_DOWN) {
       return false;
     }
-    return performClick();
-  }
-
-  @Override
-  public boolean performClick() {
-    super.performClick();
     return toggleControllerVisibility();
   }
 
   @Override
   public boolean onTrackballEvent(MotionEvent ev) {
     if (!useController || player == null) {
-      return false;
+      return super.onTrackballEvent(ev);
     }
     maybeShowController(true);
     return true;
